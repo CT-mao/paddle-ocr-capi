@@ -34,11 +34,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ocl-icd-opencl-dev opencl-headers
 
-      - name: Install OpenCL (Windows)
+      - name: Install OpenCL ICD/loader (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
+        continue-on-error: true
         run: |
-          choco install opencl-intel-cpu-runtime opencl-nvidia -y --no-progress
+          choco install opencl-intel-cpu-runtime -y --no-progress
 
       - name: "Static CRT (Windows - self-contained dll)"
         if: runner.os == 'Windows'
